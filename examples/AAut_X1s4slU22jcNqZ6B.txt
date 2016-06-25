@@ -1,0 +1,10 @@
+Type: alternating automaton
+Rule 1: 41
+Rule 2: 185
+Width: 1000
+Height: 1000
+Seed: 6
+
+Magnification: 1
+Color for state 0: (255, 255, 255)
+Color for state 1: (0, 0, 0)

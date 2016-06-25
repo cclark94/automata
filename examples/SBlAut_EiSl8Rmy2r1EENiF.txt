@@ -1,0 +1,12 @@
+Type: shifting blended automaton
+Rule 1: 134
+Rule 2: 233
+Starting probability of rule 1: 0.7
+Ending probability of rule 1: 0.1
+Width: 1000
+Height: 1000
+Seed: 3
+
+Magnification: 1
+Color for state 0: (255, 255, 255)
+Color for state 1: (0, 0, 0)

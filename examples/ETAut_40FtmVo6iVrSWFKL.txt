@@ -1,0 +1,10 @@
+Type: elementary ternary automaton
+Rule: 1294121455795
+Width: 1000
+Height: 1000
+Seed: 0
+
+Magnification: 1
+Color for state 0: (255, 0, 0)
+Color for state 1: (0, 255, 0)
+Color for state 2: (0, 0, 255)

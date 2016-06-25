@@ -1,0 +1,11 @@
+Type: peak automaton
+Rule 1: 184
+Rule 2: 204
+Starting probability: 0.5
+Width: 1000
+Height: 1000
+Seed: 12
+
+Magnification: 1
+Color for state 0: (255, 255, 255)
+Color for state 1: (0, 0, 0)
