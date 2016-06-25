@@ -6,7 +6,8 @@ def replaceEdgeIslands(autom, state, replacement):
     of autom, regardless of the islands' size.
     '''
 
-    autom.addFilter('replaceEdgeIslands state:{} replacement:{}')
+    autom.addFilter('replaceEdgeIslands state:{} replacement:{}'.format(
+        state, replacement))
 
     # Shouldn't try to replace a state that doesn't exist
     assert state >= 0 and state < autom.stateCount
