@@ -10,7 +10,6 @@
 #
 # In order to follow this pattern, the width must be even.
 
-#from aut.binary.binaryAut import BAut
 from aut.baseAut import BaseAut
 import random
 
@@ -31,13 +30,6 @@ class AAut(BaseAut):
         if seed != -1:
             random.seed(seed)
         num = random.randint(0, 2**width-1)
-
-##        binStr = bin(num)[2:]
-##        # Add leading zeroes if necessary
-##        binStr = '0' * (width - len(binStr)) + binStr
-##        #row = AAut.binStrToList(binStr)
-##        row = [int(c) for c in binStr]
-##        self.aut.append(row)
 
         row = AAut.decToBaseNList(num, 2)
         AAut.padList(row, width)        
@@ -67,11 +59,4 @@ class AAut(BaseAut):
             'Rule 2: {}'.format(self.rule2),
             'Width: {}'.format(self.width),
             'Height: {}'.format(self.height),
-            'Seed: {}'.format(self.seed) ])
-            
-
-##    def description(self):
-##        '''rule1, rule2, width, height, seed, filters'''
-##        return 'AAut_{}_{}_{}_{}_{}'.format(
-##            self.rule1, self.rule2, self.width, self.height, self.seed )
-        
+            'Seed: {}'.format(self.seed) ])        

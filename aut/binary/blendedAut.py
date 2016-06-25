@@ -3,7 +3,6 @@
 # User specifies the probability that the first rule will be used. Probability
 # of second rule equals 1 - specified probability
 
-#from aut.binary.binaryAut import BAut
 from aut.baseAut import BaseAut
 import random
 
@@ -22,11 +21,6 @@ class BlAut(BaseAut):
         if seed != -1:
             random.seed(seed)
         num = random.randint(0, 2**width-1)
-##        binStr = bin(num)[2:]
-##        # Add leading zeroes if necessary
-##        binStr = '0' * (width - len(binStr)) + binStr
-##        row = BlAut.binStrToList(binStr)  
-##        self.aut.append(row)
 
         row = BlAut.decToBaseNList(num, 2)
         BlAut.padList(row, width)        
@@ -57,9 +51,3 @@ class BlAut(BaseAut):
             'Height: {}'.format(self.height),
             'Seed: {}'.format(self.seed) ])
 
-##    def description(self):
-##        '''rule1, rule2, probability, width, height, seed'''
-##        return 'BlAut_{}_{}_{}_{}_{}_{}'.format(
-##            self.rule1, self.rule2, self.probability,
-##            self.width, self.height, self.seed )
-##        

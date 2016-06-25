@@ -1,4 +1,3 @@
-#from aut.ternary.ternaryAut import TAut
 from aut.baseAut import BaseAut
 import random
 
@@ -14,10 +13,6 @@ class ETAut(BaseAut):
         if seed != -1:
             random.seed(seed)
         num = random.randint(0, 3**width-1)
-##        ternStr = ETAut.decToTernStr(num)
-##        # Add leading zeroes if necessary
-##        ternStr = '0' * (width - len(ternStr)) + ternStr
-##        row = ETAut.ternStrToList(ternStr)
 
         row = ETAut.decToBaseNList(num, 3)
         ETAut.padList(row, width)
@@ -41,10 +36,4 @@ class ETAut(BaseAut):
             'Width: {}'.format(self.width),
             'Height: {}'.format(self.height),
             'Seed: {}'.format(self.seed) ])
-
-##    def description(self):
-##        '''rule, width, height, seed'''
-##        return 'ETAut_{}_{}_{}_{}'.format(
-##            self.rule, self.width, self.height, self.seed )
-            
     

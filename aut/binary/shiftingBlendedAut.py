@@ -1,6 +1,5 @@
 # Like probRangeBlendedAutomaton in the messy code
 
-#from aut.binary.binaryAut import BAut
 from aut.baseAut import BaseAut
 import random
 
@@ -21,12 +20,6 @@ class SBlAut(BaseAut):
         if not seed == -1:
             random.seed(seed)
         num = random.randint(0, 2**width-1)
-
-##        binStr = bin(num)[2:]
-##        # Add leading zeroes if necessary
-##        binStr = '0' * (width - len(binStr)) + binStr
-##        row = SBlAut.binStrToList(binStr)  
-##        self.aut.append(row)
 
         row = SBlAut.decToBaseNList(num, 2)
         SBlAut.padList(row, width)        
@@ -61,10 +54,3 @@ class SBlAut(BaseAut):
             'Width: {}'.format(self.width),
             'Height: {}'.format(self.height),
             'Seed: {}'.format(self.seed) ])
-
-##    def description(self):
-##        '''rule1, rule2, probStart, probEnd, width, height, seed'''
-##        return 'SBlAut_{}_{}_{}_{}_{}_{}_{}'.format(
-##            self.rule1, self.rule2, self.probStart, self.probEnd,
-##            self.width, self.height, self.seed )
-        

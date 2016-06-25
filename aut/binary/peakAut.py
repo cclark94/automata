@@ -4,7 +4,6 @@
 
 # Formula: -abs( (1-probStart)*(2x-1) ) + 1, 0 <= x <= 1
 
-#from aut.binary.binaryAut import BAut
 from aut.baseAut import BaseAut
 import random
 
@@ -23,10 +22,6 @@ class PAut(BaseAut):
         if seed != -1:
             random.seed(seed)
         num = random.randint(0, 2**width-1) 
-##        binStr = bin(num)[2:]
-##        # Add leading zeroes if necessary
-##        binStr = '0' * (width - len(binStr)) + binStr
-##        row = PAut.binStrToList(binStr)
 
         row = PAut.decToBaseNList(num, 2)
         PAut.padList(row, width)        
@@ -58,10 +53,3 @@ class PAut(BaseAut):
             'Width: {}'.format(self.width),
             'Height: {}'.format(self.height),
             'Seed: {}'.format(self.seed) ])
-
-##    def description(self):
-##        '''rule1, rule2, probStart, width, height, seed'''
-##        return 'PAut_{}_{}_{}_{}_{}_{}'.format(
-##            self.rule1, self.rule2, self.probStart, self.width,
-##            self.height, self.seed )
-        

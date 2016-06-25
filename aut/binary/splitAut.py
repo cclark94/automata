@@ -1,7 +1,6 @@
 # Split automaton
 # [add description here. note: like mixed automaton]
 
-#from aut.binary.binaryAut import BAut
 from aut.baseAut import BaseAut
 import random
 
@@ -22,11 +21,6 @@ class SAut(BaseAut):
             random.seed(seed)
         num = random.randint(0, 2**width-1)
         binStr = bin(num)[2:]
-        
-##        # Add leading zeroes if necessary
-##        binStr = '0' * (width - len(binStr)) + binStr
-##        row = SAut.binStrToList(binStr)  
-##        self.aut.append(row)
 
         row = SAut.decToBaseNList(num, 2)
         SAut.padList(row, width)        
@@ -61,11 +55,3 @@ class SAut(BaseAut):
             'Width of rule 1: {}'.format(self.width1),
             'Height: {}'.format(self.height),
             'Seed: {}'.format(self.seed) ])
-
-
-
-##    def description(self):
-##        '''rule 1, rule 2, total width, width for rule 1, height, seed'''
-##        return 'SAut_{}_{}_{}_{}_{}_{}'.format(
-##            self.rule1, self.rule2, self.width, self.width1,
-##            self.height, self.seed )
