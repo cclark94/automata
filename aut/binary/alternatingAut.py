@@ -1,19 +1,18 @@
-# Like blendedAut from the disorganized code
-#
-# Cells alternate between two rules, following a checkerboard pattern:
-#
-# ABABABABABABABAB
-# BABABABABABABABA
-# ABABABABABABABAB
-# BABABABABABABABA
-# etc.
-#
-# In order to follow this pattern, the width must be even.
-
 from aut.baseAut import BaseAut
 import random
 
 class AAut(BaseAut):
+    '''Alternating automaton.  Cells alternate between two rules,
+    following a checkerboard pattern:
+
+     ABABABABABABABAB
+     BABABABABABABABA
+     ABABABABABABABAB
+     BABABABABABABABA
+     etc.
+
+     In order to make this pattern, the width must be even.'''
+    
     def __init__(self, rule1, rule2, width, height, seed=-1):
         # Width must be even
         assert width % 2 == 0

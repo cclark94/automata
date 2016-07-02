@@ -28,6 +28,8 @@
 ##        for j in range(width):
 ##            aut[i][j] = duplicate[i][j]
 
+
+# Not currently included in filters/__init__.py
 # Needs to be reworked to sensibly deal with overlapping rectangles
 
 def patternFilter(autom, pattern, new):

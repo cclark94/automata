@@ -8,7 +8,12 @@ from aut.binary.splitAut import SAut
 from aut.ternary.alternatingTernaryAut import ATAut
 from aut.ternary.elementaryTernaryAut import ETAut
 
-
-# Include dictionary of translations (e.g., AAut = alternating automaton)
 ##translations = {
-##    'ECAut': 'elementary cellular automaton'}
+##    'AAut' : 'alternating automaton',
+##    'BlAut' : 'blended automaton',
+##    'ECAut' : 'elementary cellular automaton',
+##    'PAut' : 'peak automaton',
+##    'SBlAut' : 'shifting blended automaton',
+##    '
+##
+##    }

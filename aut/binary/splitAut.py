@@ -1,10 +1,12 @@
-# Split automaton
-# [add description here. note: like mixed automaton]
-
 from aut.baseAut import BaseAut
 import random
 
 class SAut(BaseAut):
+    '''Split automaton. The image is divided into two rectangular sections,
+    one where rule1 is applied and another where rule2 is applied. User
+    specifies the overall width and the with of rule1; the width of rule2
+    will be (overall width - width of rule1).'''
+    
     def __init__(self, rule1, rule2, width, width1, height, seed=-1):
         super().__init__(width, height)
         self.rule1 = rule1

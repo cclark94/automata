@@ -2,6 +2,11 @@ from aut.baseAut import BaseAut
 import random
 
 class ETAut(BaseAut):
+    '''Elementary ternary automaton. Same idea as ECAut in
+    binary/elementaryCellularAut.py, except that three states are used
+    rather than two. This significantly increases the number of possible
+    rules (from 2^(2^3) to 3^(3^3)).'''
+    
     def __init__(self, rule, width, height, seed=-1):
         super().__init__(width, height)
         self.rule = rule

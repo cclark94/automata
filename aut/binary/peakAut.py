@@ -1,13 +1,17 @@
-# The probability of rule1 varies from left to right. It starts at
-# probStart, climbs to 1, and then descends back to probStart
-# (upside-down V shape). 
-
-# Formula: -abs( (1-probStart)*(2x-1) ) + 1, 0 <= x <= 1
-
 from aut.baseAut import BaseAut
 import random
 
 class PAut(BaseAut):
+    '''Peak automaton. The user specifies two rules and a starting probability,
+    probStart. At the left edge of the image, the probability of rule1 is
+    probStart, but it climbs up to 1 at the middle of the image and then
+    descends back to probStart at the right edge (picture an upside-down V).
+
+    Formula to calculate probability of rule1:
+    -abs( (1-p)*(2x-1) ) + 1,
+    where p is the starting probability of rule 1 (0 <= p <= 1) and x is the
+    proportion across the screen (0 <= x <= 1).'''
+    
     def __init__(self, rule1, rule2, probStart, width, height, seed=-1):
         super().__init__(width, height)
         self.rule1 = rule1

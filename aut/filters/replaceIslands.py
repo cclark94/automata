@@ -1,8 +1,8 @@
 def replaceIslands(autom, state, lower, upper, replacement, negate=False):
-    '''
-    If negate=Fase, replaces all islands such that lower <= size <= upper.
-    If negate=True, replaces all islands such that size < lower or size > upper.
-    '''
+    '''If negate=Fase, replaces all islands such that lower <= size <= upper.
+    If negate=True, replaces all islands such that size < lower or
+    size > upper.'''
+    
     # Shouldn't try to replace a state that doesn't exist
     assert state >= 0 and state < autom.stateCount
 

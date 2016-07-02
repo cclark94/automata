@@ -2,6 +2,9 @@ from aut.baseAut import BaseAut
 import random
 
 class ATAut(BaseAut):
+    '''Alternating ternary automaton. Same idea as AAut in
+    binary/alternatingAut.py, but three states are used rather than two.'''
+    
     def __init__(self, rule1, rule2, width, height, seed=-1):
         # Width must be even
         assert width % 2 == 0

@@ -1,10 +1,12 @@
-# Elementary cellular automaton
-# [add description here]
-
 from aut.baseAut import BaseAut
 import random
 
 class ECAut(BaseAut):
+    '''Elementary cellular automaton. This is the most basic kind of automaton
+    available. The rule-numbering convention is based on Wolfram codes. You
+    can read more about elementary cellular automata at
+    https://en.wikipedia.org/wiki/Elementary_cellular_automaton.'''
+    
     def __init__(self, rule, width, height, seed=-1):
         super().__init__(width, height)
         self.rule = rule

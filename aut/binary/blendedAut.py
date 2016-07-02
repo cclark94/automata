@@ -1,12 +1,12 @@
-# Note: this is like probabilisticBlendedAutomaton from the messy code
-
-# User specifies the probability that the first rule will be used. Probability
-# of second rule equals 1 - specified probability
-
 from aut.baseAut import BaseAut
 import random
 
 class BlAut(BaseAut):
+    '''Blended automaton. The user specifies two rules and the probability of
+    the first rule being used; the probability of the second rule is
+    1-probability. At each cell a random value is generated to determine which
+    rule is applied.'''
+    
     def __init__(self, rule1, rule2, probability, width, height, seed=-1):
         super().__init__(width, height)
         self.rule1 = rule1

@@ -1,9 +1,12 @@
-# Like probRangeBlendedAutomaton in the messy code
-
 from aut.baseAut import BaseAut
 import random
 
 class SBlAut(BaseAut):
+    '''Shifting blended automaton. Similar concept to BlAut class in
+    blendedAutomaton.py. But the probability of rule1 changes as you move
+    from the top to the bottom of the screen. At the top of the screen the
+    probability is probStart, but it gradually transitions to probEnd.'''
+    
     def __init__(self, rule1, rule2, probStart, probEnd, width, height,
                  seed=-1):
         super().__init__(width, height)
@@ -25,7 +28,7 @@ class SBlAut(BaseAut):
         SBlAut.padList(row, width)        
         self.aut.append(row)
         
-        # Probability starts at probStart but gradually increases
+        # Probability starts at probStart but gradually transitions
         # to probEnd
         probCurr = probStart
         probStep = (probEnd-probStart)/(height-1)

@@ -1,15 +1,11 @@
-Add translation dictionary in __init__
 Change seeds so that -1 doesn't save, unspecified does save
-Add brief documentation for each Aut type
-Remove commented sections
 Add static fields to classes -- min rule, max rule, etc.
 New filter: rotate
 New filter: simplify states (e.g., if aut only uses 1 and 2, change to 0 and 1)
-Change waveAut to sine wave, allow multiple peaks (default 1)
+Change eakAut to sine wave, allow multiple peaks (default 1)
 Rethink patternFilter
 - dealing with overlapping patterns
 - option to negate
 New class: ternaryWaveAut
 New filter: combine two automata using logical operators
 New filter: remove top and bottom islands (just like replaceEdgeIslands)
-Command line using argparse

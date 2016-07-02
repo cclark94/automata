@@ -1,10 +1,8 @@
 import queue
 
 def replaceEdgeIslands(autom, state, replacement):
-    '''
-    Replaces all islands of "state" that wrap around the left and right edges
-    of autom, regardless of the islands' size.
-    '''
+    '''Replaces all islands of "state" that wrap around the left and right edges
+    of autom, regardless of the islands' size.'''
 
     autom.addFilter('replaceEdgeIslands state:{} replacement:{}'.format(
         state, replacement))
