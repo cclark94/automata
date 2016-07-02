@@ -7,7 +7,7 @@ class ETAut(BaseAut):
     rather than two. This significantly increases the number of possible
     rules (from 2^(2^3) to 3^(3^3)).'''
     
-    def __init__(self, rule, width, height, seed=-1):
+    def __init__(self, rule, width, height, seed=None):
         super().__init__(width, height)
         self.rule = rule
         self.seed = seed
@@ -15,8 +15,7 @@ class ETAut(BaseAut):
         self.aut = list()
 
         d = ETAut.ruleDict(rule, 3)
-        if seed != -1:
-            random.seed(seed)
+        self.prepareRandomSeed(seed)
         num = random.randint(0, 3**width-1)
 
         row = ETAut.decToBaseNList(num, 3)

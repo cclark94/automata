@@ -1,5 +1,5 @@
 from PIL import Image
-import random, string
+import random, string, sys
 
 class BaseAut:
     def __init__(self, width, height):
@@ -19,6 +19,30 @@ class BaseAut:
         return s
 
 
+    def prepareRandomSeed(self, seed):
+        '''There are three possibilities:
+        1. The user specifies a seed as a positive integer. The automaton will
+        be generated using this random seed.
+        2. The user doesn't specify the seed. In this case, a seed will be
+        chosen at random; if the the user saves the automaton, the random seed
+        will be specified in the log file. So an automaton generated this way
+        could be regenerated exactly.
+        3. The user specifies -1 as the seed. This is like case (2), except that
+        the seed won't be recorded and won't appear on the log file. It won't
+        be possible to exactly duplicate the automaton using the log file, since
+        the seed will be unknown.'''
+        if seed:
+            if seed == -1:
+                self.seed = "<hidden>"
+            else:
+                random.seed(seed)
+                self.seed = seed
+        else:
+            seed = random.randint(0, sys.maxsize)
+            random.seed(seed)
+            self.seed = seed
+
+
     def infoStr(self):
         raise NotImplementedError()
 
@@ -31,26 +55,15 @@ class BaseAut:
         '''Creates a png image of the automaton and a log telling
         all of essential info about the automaton and image (i.e., everything
         you would need to reconstruct them).'''
-        if filename ==  None:
-            # Gets the name of the type of automaton (e.g., ECAut)
-            prefix = str(type(self))[8:-2].split('.')[-1]
-            # Generate random 16-character filename
-            random.seed()
-            filename = prefix + '_' + ''.join(random.choice(
-                string.ascii_lowercase + string.ascii_uppercase + string.digits) \
-                               for i in range(16))
-
-        # Default color scheme for binary automaton: 0=white, 1=black
-        if self.stateCount == 2 and not colors:
-            colors = ((255, 255, 255), (0, 0, 0))
-        # Default color scheme for ternary automaton: 0=red, 1=blue, 2=green
-        elif self.stateCount == 3 and not colors:
-            colors = ((255, 0, 0), (0, 255, 0), (0, 0, 255))
-
-        self.saveImage(filename, colors, magnification)
+        if filename == None:
+            filename = BaseAut.__generateFileName(self)
+        if colors == None:
+            colors = BaseAut.__getDefaultColors(self)
+            
+        self.saveImage(filename, magnification, colors)
 
         # Save info about automaton in a log
-        f = open(filename + '.txt', 'w')
+        f = open(filename + '.log', 'w')
         f.write(self.__str__())
         f.write('\n\nMagnification: {}'.format(magnification))
         for i in range(len(colors)):
@@ -58,7 +71,12 @@ class BaseAut:
         f.close()        
             
 
-    def saveImage(self, filename, colors, magnification):
+    def saveImage(self, filename=None, magnification=1, colors=None):
+        if filename == None:
+            filename = BaseAut.__generateFileName(self)
+        if colors == None:
+            colors = BaseAut.__getDefaultColors(self)
+
         assert type(magnification) == int and magnification >= 1
         assert len(colors) == self.stateCount
 
@@ -72,9 +90,30 @@ class BaseAut:
                         im.putpixel(
                             (j*magnification+k, i*magnification+l),
                             colors[self.aut[i][j]] )
-                #im.putpixel((j, i), colors[self.aut[i][j]])
         im.save(filename + '.png')
 
+
+    @staticmethod
+    def __generateFileName(aut):
+        # Gets the name of the type of automaton (e.g., ECAut)
+        prefix = str(type(aut))[8:-2].split('.')[-1]
+        # Generate random 16-character filename
+        random.seed()
+        return prefix + '_' + ''.join(random.choice(
+            string.ascii_lowercase + string.ascii_uppercase + string.digits) \
+                           for i in range(16))
+
+
+    @staticmethod
+    def __getDefaultColors(aut):
+        # Default color scheme for binary automaton: 0=white, 1=black
+        if aut.stateCount == 2:
+            return ((255, 255, 255), (0, 0, 0))
+        # Default color scheme for ternary automaton: 0=red, 1=blue, 2=green
+        elif aut.stateCount == 3:
+            return ((255, 0, 0), (0, 255, 0), (0, 0, 255))
+        else: return None
+            
 
     @staticmethod
     def ruleDict(code, base):

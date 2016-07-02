@@ -12,7 +12,7 @@ class PAut(BaseAut):
     where p is the starting probability of rule 1 (0 <= p <= 1) and x is the
     proportion across the screen (0 <= x <= 1).'''
     
-    def __init__(self, rule1, rule2, probStart, width, height, seed=-1):
+    def __init__(self, rule1, rule2, probStart, width, height, seed=None):
         super().__init__(width, height)
         self.rule1 = rule1
         self.rule2 = rule2
@@ -22,9 +22,7 @@ class PAut(BaseAut):
         self.aut = list()
         d1 = PAut.ruleDict(rule1, 2)
         d2 = PAut.ruleDict(rule2, 2)
-        
-        if seed != -1:
-            random.seed(seed)
+        self.prepareRandomSeed(seed)
         num = random.randint(0, 2**width-1) 
 
         row = PAut.decToBaseNList(num, 2)

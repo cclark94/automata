@@ -5,7 +5,7 @@ class ATAut(BaseAut):
     '''Alternating ternary automaton. Same idea as AAut in
     binary/alternatingAut.py, but three states are used rather than two.'''
     
-    def __init__(self, rule1, rule2, width, height, seed=-1):
+    def __init__(self, rule1, rule2, width, height, seed=None):
         # Width must be even
         assert width % 2 == 0
         super().__init__(width, height)
@@ -18,8 +18,7 @@ class ATAut(BaseAut):
         d2 = ATAut.ruleDict(rule2, 3)
 
         useD1 = True        
-        if seed != -1:
-            random.seed(seed)
+        self.prepareRandomSeed(seed)
         num = random.randint(0, 3**width-1)
 
         row = ATAut.decToBaseNList(num, 3)

@@ -8,7 +8,7 @@ class SBlAut(BaseAut):
     probability is probStart, but it gradually transitions to probEnd.'''
     
     def __init__(self, rule1, rule2, probStart, probEnd, width, height,
-                 seed=-1):
+                 seed=None):
         super().__init__(width, height)
         self.rule1 = rule1
         self.rule2 = rule2
@@ -20,8 +20,7 @@ class SBlAut(BaseAut):
         
         d1 = SBlAut.ruleDict(rule1, 2)
         d2 = SBlAut.ruleDict(rule2, 2)
-        if not seed == -1:
-            random.seed(seed)
+        self.prepareRandomSeed(seed)
         num = random.randint(0, 2**width-1)
 
         row = SBlAut.decToBaseNList(num, 2)

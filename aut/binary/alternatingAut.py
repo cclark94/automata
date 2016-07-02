@@ -13,7 +13,7 @@ class AAut(BaseAut):
 
      In order to make this pattern, the width must be even.'''
     
-    def __init__(self, rule1, rule2, width, height, seed=-1):
+    def __init__(self, rule1, rule2, width, height, seed=None):
         # Width must be even
         assert width % 2 == 0
         super().__init__(width, height)
@@ -26,10 +26,9 @@ class AAut(BaseAut):
         d2 = AAut.ruleDict(rule2, 2)
         
         useD1 = True
-        if seed != -1:
-            random.seed(seed)
-        num = random.randint(0, 2**width-1)
+        self.prepareRandomSeed(seed)
 
+        num = random.randint(0, 2**width-1)
         row = AAut.decToBaseNList(num, 2)
         AAut.padList(row, width)        
         self.aut.append(row)

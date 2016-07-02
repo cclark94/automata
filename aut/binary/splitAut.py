@@ -7,7 +7,7 @@ class SAut(BaseAut):
     specifies the overall width and the with of rule1; the width of rule2
     will be (overall width - width of rule1).'''
     
-    def __init__(self, rule1, rule2, width, width1, height, seed=-1):
+    def __init__(self, rule1, rule2, width, width1, height, seed=None):
         super().__init__(width, height)
         self.rule1 = rule1
         self.rule2 = rule2
@@ -19,8 +19,7 @@ class SAut(BaseAut):
         d1 = SAut.ruleDict(rule1, 2)
         d2 = SAut.ruleDict(rule2, 2)
         width2 = width - width1
-        if not seed == -1:
-            random.seed(seed)
+        self.prepareRandomSeed(seed)
         num = random.randint(0, 2**width-1)
         binStr = bin(num)[2:]
 

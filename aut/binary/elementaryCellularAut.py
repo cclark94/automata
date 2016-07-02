@@ -7,16 +7,14 @@ class ECAut(BaseAut):
     can read more about elementary cellular automata at
     https://en.wikipedia.org/wiki/Elementary_cellular_automaton.'''
     
-    def __init__(self, rule, width, height, seed=-1):
+    def __init__(self, rule, width, height, seed=None):
         super().__init__(width, height)
         self.rule = rule
         self.seed = seed
         self.stateCount = 2
         self.aut = list()
         d = ECAut.ruleDict(rule, 2)
-        
-        if seed != -1:
-            random.seed(seed)
+        self.prepareRandomSeed(seed)
         num = random.randint(0, 2**width-1)
 
         row = ECAut.decToBaseNList(num, 2)
