@@ -1,10 +1,10 @@
 import queue
 
-def replaceEdgeIslands(autom, state, replacement):
-    '''Replaces all islands of "state" that wrap around the left and right edges
-    of autom, regardless of the islands' size.'''
+def eiFilt(autom, state, replacement):
+    '''Edge island filter. Replaces all islands of "state" that wrap around the
+    left and right edges of autom.'''
 
-    autom.addFilter('replaceEdgeIslands state:{} replacement:{}'.format(
+    autom.addFilter('eiFilt state:{} replacement:{}'.format(
         state, replacement))
 
     # Shouldn't try to replace a state that doesn't exist

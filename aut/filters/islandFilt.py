@@ -1,5 +1,6 @@
-def replaceIslands(autom, state, lower, upper, replacement, negate=False):
-    '''If negate=Fase, replaces all islands such that lower <= size <= upper.
+def iFilt(autom, state, lower, upper, replacement, negate=False):
+    '''Island filter. If negate=Fase, replaces all islands such that
+    lower <= size <= upper.
     If negate=True, replaces all islands such that size < lower or
     size > upper.'''
     
@@ -14,7 +15,7 @@ def replaceIslands(autom, state, lower, upper, replacement, negate=False):
     if replacement == autom.stateCount:
         autom.stateCount = replacement + 1
     
-    autom.addFilter('replaceIslands state:{} lowerBound:{} upperBound:{} replacement:{} negate:{}'.format(
+    autom.addFilter('iFilt state:{} lowerBound:{} upperBound:{} replacement:{} negate:{}'.format(
         state, lower, upper, replacement, negate))
 
     l = autom.aut
