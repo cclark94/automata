@@ -4,10 +4,17 @@ import random
 class ATAut(BaseAut):
     '''Alternating ternary automaton. Same idea as AAut in
     binary/alternatingAut.py, but three states are used rather than two.'''
+
+    RULE_MIN = 0
+    RULE_MAX = 3**(3**3)-1
     
     def __init__(self, rule1, rule2, width, height, seed=None):
-        # Width must be even
-        assert width % 2 == 0
+        if width % 2 != 0:
+            raise ValueError('AAut width must be even')
+        if rule1 < AAut.RULE_MIN or rule1 > AAut.RULE_MAX:
+            raise ValueError('rule1 outside of acceptable range')
+        if rule2 < AAut.RULE_MIN or rule1 > AAut.RULE_MAX:
+            raise ValueError('rule2 outside of acceptable range')  
         super().__init__(width, height)
         self.rule1 = rule1
         self.rule2 = rule2

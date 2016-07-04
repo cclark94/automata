@@ -5,9 +5,14 @@ class ETAut(BaseAut):
     '''Elementary ternary automaton. Same idea as ECAut in
     binary/elementaryCellularAut.py, except that three states are used
     rather than two. This significantly increases the number of possible
-    rules (from 2^(2^3) to 3^(3^3)).'''
+    rules (from 2**(2**3) to 3**(3**3)).'''
+
+    RULE_MIN = 0
+    RULE_MAX = 3**(3**3)-1
     
     def __init__(self, rule, width, height, seed=None):
+        if rule < AAut.RULE_MIN or rule > AAut.RULE_MAX:
+            raise ValueError('rule1 outside of acceptable range')
         super().__init__(width, height)
         self.rule = rule
         self.seed = seed

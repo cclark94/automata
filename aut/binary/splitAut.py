@@ -6,8 +6,17 @@ class SAut(BaseAut):
     one where rule1 is applied and another where rule2 is applied. User
     specifies the overall width and the with of rule1; the width of rule2
     will be (overall width - width of rule1).'''
+
+    RULE_MIN = 0
+    RULE_MAX = 2**(2**3)-1
     
     def __init__(self, rule1, rule2, width, width1, height, seed=None):
+        if width1 > width:
+            raise ValueError('width1 cannot exceed width')
+        if rule1 < AAut.RULE_MIN or rule1 > AAut.RULE_MAX:
+            raise ValueError('rule1 outside of acceptable range')
+        if rule2 < AAut.RULE_MIN or rule1 > AAut.RULE_MAX:
+            raise ValueError('rule2 outside of acceptable range')
         super().__init__(width, height)
         self.rule1 = rule1
         self.rule2 = rule2

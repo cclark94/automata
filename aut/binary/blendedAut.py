@@ -6,8 +6,15 @@ class BlAut(BaseAut):
     the first rule being used; the probability of the second rule is
     1-probability. At each cell a random value is generated to determine which
     rule is applied.'''
+
+    RULE_MIN = 0
+    RULE_MAX = 2**(2**3)-1
     
     def __init__(self, rule1, rule2, probability, width, height, seed=None):
+        if rule1 < AAut.RULE_MIN or rule1 > AAut.RULE_MAX:
+            raise ValueError('rule1 outside of acceptable range')
+        if rule2 < AAut.RULE_MIN or rule1 > AAut.RULE_MAX:
+            raise ValueError('rule2 outside of acceptable range')   
         super().__init__(width, height)
         self.rule1 = rule1
         self.rule2 = rule2

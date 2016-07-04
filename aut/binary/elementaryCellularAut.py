@@ -6,8 +6,13 @@ class ECAut(BaseAut):
     available. The rule-numbering convention is based on Wolfram codes. You
     can read more about elementary cellular automata at
     https://en.wikipedia.org/wiki/Elementary_cellular_automaton.'''
+
+    RULE_MIN = 0
+    RULE_MAX = 2**(2**3)-1
     
     def __init__(self, rule, width, height, seed=None):
+        if rule < AAut.RULE_MIN or rule > AAut.RULE_MAX:
+            raise ValueError('rule outside of acceptable range')
         super().__init__(width, height)
         self.rule = rule
         self.seed = seed
