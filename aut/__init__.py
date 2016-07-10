@@ -7,3 +7,4 @@ from aut.binary.splitAut import SAut
 
 from aut.ternary.alternatingTernaryAut import ATAut
 from aut.ternary.elementaryTernaryAut import ETAut
+from aut.ternary.shiftingBlendedTernaryAut import SBlTAut

@@ -1,4 +1,4 @@
-Add static fields to classes -- min rule, max rule, etc.
+Correct AAut.RULE_MIN stuff at beginning of binary and ternary files
 New filter: rotate
 New filter: simplify states (e.g., if aut only uses 1 and 2, change to 0 and 1)
 Change PeakAut to sine wave, allow multiple peaks (default 1)
@@ -6,5 +6,5 @@ Rethink patternFilter
 - dealing with overlapping patterns
 - option to negate
 New class: ternaryPeakAut
-New filter: combine two automata using logical operators
 New filter: remove top and bottom islands (just like replaceEdgeIslands)
+Think about nixing binary/ternary etc. and replacing with a parameter (so AAut and ATAut would become AAut[2] and AAut[3], for instance)
