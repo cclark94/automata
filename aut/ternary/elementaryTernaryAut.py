@@ -11,7 +11,7 @@ class ETAut(BaseAut):
     RULE_MAX = 3**(3**3)-1
     
     def __init__(self, rule, width, height, seed=None):
-        if rule < AAut.RULE_MIN or rule > AAut.RULE_MAX:
+        if rule < ETAut.RULE_MIN or rule > ETAut.RULE_MAX:
             raise ValueError('rule1 outside of acceptable range')
         super().__init__(width, height)
         self.rule = rule

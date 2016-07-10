@@ -13,9 +13,9 @@ class SAut(BaseAut):
     def __init__(self, rule1, rule2, width, width1, height, seed=None):
         if width1 > width:
             raise ValueError('width1 cannot exceed width')
-        if rule1 < AAut.RULE_MIN or rule1 > AAut.RULE_MAX:
+        if rule1 < SAut.RULE_MIN or rule1 > SAut.RULE_MAX:
             raise ValueError('rule1 outside of acceptable range')
-        if rule2 < AAut.RULE_MIN or rule1 > AAut.RULE_MAX:
+        if rule2 < SAut.RULE_MIN or rule1 > SAut.RULE_MAX:
             raise ValueError('rule2 outside of acceptable range')
         super().__init__(width, height)
         self.rule1 = rule1

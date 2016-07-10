@@ -11,7 +11,7 @@ class ECAut(BaseAut):
     RULE_MAX = 2**(2**3)-1
     
     def __init__(self, rule, width, height, seed=None):
-        if rule < AAut.RULE_MIN or rule > AAut.RULE_MAX:
+        if rule < ECAut.RULE_MIN or rule > ECAut.RULE_MAX:
             raise ValueError('rule outside of acceptable range')
         super().__init__(width, height)
         self.rule = rule
