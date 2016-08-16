@@ -9,7 +9,12 @@ def cFilt(autom1, autom2, mapping):
 
     As an example, say that autom1 and autom2 are binary automata and you
     want to turn autom1.aut into autom1.aut XOR autom2.aut. This is the mapping:
-    { (0, 0): 0, (0, 1):1, (1, 0):1, (1, 1):0 }'''
+    { (0, 0): 0, (0, 1):1, (1, 0):1, (1, 1):0 }
+
+    Note: I'm pretty sure that you could do XOR with a simpler mapping too:
+    { (0, 1): 1, (1, 1):0 }. You don't need to specify the other two
+    possibilities, because they won't be changed in autom1 after the filter
+    is applied.'''
     
     assert len(autom1.aut) == len(autom2.aut)
     assert len(autom1.aut[0]) == len(autom2.aut[0])
