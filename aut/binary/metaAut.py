@@ -20,7 +20,7 @@ class MAut(BaseAut):
         # the ruleAut
         width = ruleAut.width
         height = ruleAut.height
-        super.init(width, height)
+        super().__init__(width, height)
         self.mapping = mapping
         self.ruleAut = ruleAut
         # It would be good to generalize this to any statecount in the future

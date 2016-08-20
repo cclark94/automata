@@ -134,6 +134,35 @@ class BaseAut:
                     ind += 1
         return d
 
+    @staticmethod
+    def generalizedRuleDict(code, base, cellCount=3):
+        '''code is the Wolfram code for an automaton, ranging from 0 to
+        base**(base**neighborCount).
+        Returns a dictionary telling the resulting cell state for each possible
+        configuration.
+        The difference between this and ruleDict() is that this allows the user
+        to specify the cell count, meaning the number of cells used to determine
+        the next state of a particular cell. (cellCount is 3 for a standard cellular
+        automaton.)
+        Once I'm sure this method is working, I can rename this
+        as ruleDict and get rid of the old ruleDict() method.'''
+        assert code >= 0 and code < base**(base**cellCount)
+        d = dict()
+        ruleList = BaseAut.decToBaseNList(code, base)
+        BaseAut.padList(ruleList, base**cellCount)
+        maximum = base ** cellCount - 1
+        # Keep track of position in ruleList
+        ind = 0
+        for i in range(maximum, -1, -1):
+            # Get rid of leading '0b'
+            config = bin(i)[2:]
+            config = [int(c) for c in config]
+            BaseAut.padList(config, cellCount)
+            config = tuple(config)
+            d[config] = ruleList[ind]
+            ind += 1
+        return d
+            
 
     @staticmethod
     def decToBaseNList(n, base):
