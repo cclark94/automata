@@ -16,25 +16,34 @@ class CAut(BaseAut):
     MIDDLE_RULE_MIN = 0
     MIDDLE_RULE_MAX = 2**(2**2)
 
-    def __init__(self, rule, middleRule, width1, width2, height, seed=None):
-        if rule < CAut.RULE_MIN or rule > CAut.RULE_MAX:
+    def __init__(self, rule1, rule2, middleRule, width1, width2, height,
+                 seed=None, separatorWidth=10):
+        if rule1 < CAut.RULE_MIN or rule1 > CAut.RULE_MAX:
             raise ValueError('rule outside of acceptable range')
-        if middleRule < CAut.MIDDLE_RULE_MIN or middleRule > CAut.MIDDLE_RULE_MAX:
+        if rule2 < CAut.RULE_MIN or rule2 > CAut.RULE_MAX:
+            raise ValueError('rule outside of acceptable range')
+        if middleRule < CAut.MIDDLE_RULE_MIN or \
+           middleRule > CAut.MIDDLE_RULE_MAX:
             raise ValueError('rule outside of acceptable range')
         # Widths should be odd so that there's a middle column for each
         # automaton
         assert width1 % 2 == 1
         assert width2 % 2 == 1
-        width = width1 + width2
+        width = width1 + separatorWidth + width2
         super().__init__(width, height)
-        self.rule = rule
+        self.rule1 = rule1
+        self.rule2 = rule2
         self.middleRule = middleRule
         self.width1 = width1
         self.width2 = width2
         self.seed = seed
-        self.stateCount = 2
+        self.separatorWidth = separatorWidth
+        # Only two states for the actual automata, but the separator will use
+        # a third state
+        self.stateCount = 3
         self.aut = list()
-        d = CAut.ruleDict(rule, 2)
+        d1 = CAut.ruleDict(rule1, 2)
+        d2 = CAut.ruleDict(rule2, 2)
         # The next state of the middle cell is determine based on the current
         # state of both middle cells. So there are only 2 cells being
         # considered, which is the last argument to generalizedRuleDict()
@@ -45,10 +54,17 @@ class CAut(BaseAut):
         num1 = random.randint(0, 2**width1-1)
         num2 = random.randint(0, 2**width2-1)
 
-        # A row consists of the rows of the two automata put side by side
-        row = CAut.decToBaseNList(num1, 2) + CAut.decToBaseNList(num2, 2)
-        CAut.padList(row, width)
+        # A row consists of the rows of the two automata put side by side,
+        # with a separator in between. The separator uses a separate state from
+        # the states used in the automata
+        row1 = CAut.decToBaseNList(num1, 2)
+        row2 = CAut.decToBaseNList(num2, 2)
+        CAut.padList(row1, width1)
+        CAut.padList(row2, width2)
+        row = row1 + [2]*separatorWidth + row2
+        assert len(row) == width
         self.aut.append(row)
+        
         for i in range(height-1):
             temp = list()
             w1floor = math.floor(width1/2)
@@ -57,11 +73,12 @@ class CAut(BaseAut):
             w2ceil = math.ceil(width2/2)
             # Left side of first automaton
             for j in range(w1floor):
-                prev = row[(j-1) % w1floor]
+                #prev = row[(j-1) % w1floor]
+                prev = row[(j-1) % width1]
                 curr = row[j]
                 nxt = row[j+1]
                 config = (prev, curr, nxt)
-                temp.append(d[config])
+                temp.append(d1[config])
             # Middle column of first automaton
             curr = row[w1floor]
             other = row[width1 + w2floor]
@@ -71,36 +88,43 @@ class CAut(BaseAut):
             for j in range(w1ceil, width1):
                 prev = row[j-1]
                 curr = row[j]
-                nxt = row[(j+1-w1ceil) % w1floor + w1ceil]
+                #nxt = row[(j+1-w1ceil) % w1floor + w1ceil]
+                nxt = row[(j+1) % width1]
                 config = (prev, curr, nxt)
-                temp.append(d[config])
+                temp.append(d1[config])
+            # Separtor
+            temp.extend([2]*separatorWidth)
             # repeat for the second automaton
+            w = width1 + separatorWidth
             # Left side of second automaton
             for j in range(w2floor):
-                prev = row[width1 + ((j-1)%w2floor)]
-                curr = row[width1 + j]
-                nxt = row[width1 + j + 1]
+                #prev = row[w + ((j-1)%w2floor)]
+                prev = row[w + ((j-1)%width2)]
+                curr = row[w + j]
+                nxt = row[w + j + 1]
                 config = (prev, curr, nxt)
-                temp.append(d[config])
+                temp.append(d2[config])
             # Middle column of second automaton
-            curr = row[width1 + w2floor]
+            curr = row[w + w2floor]
             other = row[w1floor]
             config = (curr, other)
             temp.append(middleD[config])
             # Right side of second automaton
             for j in range(w2ceil, width2):
-                prev = row[width1 + j - 1]
-                curr = row[width1 + j]
-                nxt = row[width1 + ((j+1-w2ceil) % w2floor + w2ceil)]
+                prev = row[w + j - 1]
+                curr = row[w + j]
+                #nxt = row[w + ((j+1-w2ceil) % w2floor + w2ceil)]
+                nxt = row[w + ((j+1)%width2)]
                 config = (prev, curr, nxt)
-                temp.append(d[config])
+                temp.append(d2[config])
             row = temp
             self.aut.append(row)
 
     def infoStr(self):
         return '\n'.join([
             'Type: connected automaton',
-            'Rule: {}'.format(self.rule),
+            'Rule1: {}'.format(self.rule1),
+            'Rule2: {}'.format(self.rule2),
             'Middle rule: {}'.format(self.middleRule),
             'Width1: {}'.format(self.width1),
             'Width2: {}'.format(self.width2),

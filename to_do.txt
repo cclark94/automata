@@ -1,9 +1,11 @@
-New filter: rotate
-New filter: simplify states (e.g., if aut only uses 1 and 2, change to 0 and 1)
-Change PeakAut to sine wave, allow multiple peaks (default 1)
-Rethink patternFilter
-- dealing with overlapping patterns
-- option to negate
-New class: ternaryPeakAut
-New filter: remove top and bottom islands (just like replaceEdgeIslands)
-Think about nixing binary/ternary etc. and replacing with a parameter (so AAut and ATAut would become AAut[2] and AAut[3], for instance)
+- New filter: rotate
+- New filter: simplify states (e.g., if aut only uses 1 and 2, change to 0 and 1)
+- Change PeakAut to sine wave, allow multiple peaks (default 1)
+- Rethink patternFilter
+    - dealing with overlapping patterns
+    - option to negate
+- New class: ternaryPeakAut
+- New filter: remove top and bottom islands (just like replaceEdgeIslands)
+- Think about nixing binary/ternary etc. and replacing with a parameter (so AAut and ATAut would become AAut[2] and AAut[3], for instance)
+- In BaseAut, change the generalized... functions to replace the non-generalized functions (i.e., change their names and get rid of the old ones)
+- Look into seed 0 -- doesn't seem to act deterministic. Is this intentional?
