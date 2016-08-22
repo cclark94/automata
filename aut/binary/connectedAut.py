@@ -4,17 +4,16 @@ import random, math
 class CAut(BaseAut):
     '''Connected automaton. There are two separate automata sharing the screen,
     but their middle cells influence each other. The two automata are binary
-    automata, but their middle cells have two follow a special kind of rule
-    since these cells only have one neighbor. (Later I might want to try making
-    these cells have three neighbors: the normal two neighbors and then also
-    the middle cell of the other automaton. And it would be good to generalize
-    this so that you can have more than two separate automata.'''
+    automata, but their middle cells have to follow a special kind of rule
+    since these cells are influenced not just by their immediate neighbors but
+    also by the middle cell of the other automaton.  It would be good to
+    generalize this so that you can have more than two separate automata.'''
 
     RULE_MIN = 0
     RULE_MAX = 2**(2**3)-1
-    # The middle cells just have one neighbor: the other middle cell
+    # The middle cells are influenced by three other cells
     MIDDLE_RULE_MIN = 0
-    MIDDLE_RULE_MAX = 2**(2**2)
+    MIDDLE_RULE_MAX = 2**(2**4) - 1
 
     def __init__(self, rule1, rule2, middleRule, width1, width2, height,
                  seed=None, separatorWidth=10):
@@ -44,10 +43,11 @@ class CAut(BaseAut):
         self.aut = list()
         d1 = CAut.ruleDict(rule1, 2)
         d2 = CAut.ruleDict(rule2, 2)
-        # The next state of the middle cell is determine based on the current
-        # state of both middle cells. So there are only 2 cells being
-        # considered, which is the last argument to generalizedRuleDict()
-        middleD = CAut.generalizedRuleDict(middleRule, 2, 2)
+        # The next state of the middle cell is determined based on the two
+        # middle cells and the immediate neighbors of the middle cell.
+        # So there are four cells being considered, which is the last argument
+        # to generalizedRuleDict()
+        middleD = CAut.generalizedRuleDict(middleRule, 2, 4)
         self.prepareRandomSeed(seed)
         # I think it would also be okay to just generate one random number
         # covering the entire width
@@ -80,9 +80,14 @@ class CAut(BaseAut):
                 config = (prev, curr, nxt)
                 temp.append(d1[config])
             # Middle column of first automaton
+            # Order for cells being considered:
+            # left neighbor, self, right neighbor, other middle
+            # The modulos are probably unnecessary
+            prev = row[(w1floor-1) % width1]
             curr = row[w1floor]
-            other = row[width1 + w2floor]
-            config = (curr, other)
+            nxt = row[(w1floor+1) % width1]
+            other = row[width1 + separatorWidth + w2floor]
+            config = (prev, curr, nxt, other)
             temp.append(middleD[config])
             # Right side of first automaton
             for j in range(w1ceil, width1):
@@ -105,9 +110,12 @@ class CAut(BaseAut):
                 config = (prev, curr, nxt)
                 temp.append(d2[config])
             # Middle column of second automaton
+            # Again, modulos are probably unnecessary
+            prev = row[w + (w2floor-1)%width2]
             curr = row[w + w2floor]
+            nxt = row[w + (w2floor+1)%width2]
             other = row[w1floor]
-            config = (curr, other)
+            config = (prev, curr, nxt, other)
             temp.append(middleD[config])
             # Right side of second automaton
             for j in range(w2ceil, width2):
