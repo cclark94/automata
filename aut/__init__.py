@@ -1,3 +1,4 @@
+#from __future__ import absolute_import
 from aut.binary.alternatingAut import AAut
 from aut.binary.blendedAut import BlAut
 from aut.binary.elementaryCellularAut import ECAut
