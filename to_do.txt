@@ -1,3 +1,6 @@
+- Randomly flip bits according to a prior probability
+- Flip bits according to a specified input file (bitmap)
+
 - New filter: rotate
 - New filter: simplify states (e.g., if aut only uses 1 and 2, change to 0 and 1)
 - Change PeakAut to sine wave, allow multiple peaks (default 1)

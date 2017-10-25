@@ -1,4 +1,4 @@
-import queue
+import Queue
 
 def eiFilt(autom, state, replacement):
     '''Edge island filter. Replaces all islands of "state" that wrap around the
@@ -24,7 +24,7 @@ def eiFilt(autom, state, replacement):
     height = autom.height
     for i in range(height):
         if l[i][0] == state and l[i][width-1] == state:
-            q = queue.Queue()
+            q = Queue.Queue()
             l[i][0] = replacement
             l[i][width-1] = replacement
             q.put((i, 0))
