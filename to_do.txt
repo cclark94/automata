@@ -4,6 +4,7 @@
 - Rethink patternFilter
     - dealing with overlapping patterns
     - option to negate
+    - regex-style syntax?
 - New class: ternaryPeakAut
 - New filter: remove top and bottom islands (just like replaceEdgeIslands)
 - Think about nixing binary/ternary etc. and replacing with a parameter (so AAut and ATAut would become AAut[2] and AAut[3], for instance)

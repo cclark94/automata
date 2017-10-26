@@ -1,4 +1,3 @@
-#from __future__ import absolute_import
 from aut.binary.alternatingAut import AAut
 from aut.binary.blendedAut import BlAut
 from aut.binary.elementaryCellularAut import ECAut
@@ -7,6 +6,8 @@ from aut.binary.shiftingBlendedAut import SBlAut
 from aut.binary.splitAut import SAut
 from aut.binary.metaAut import MAut
 from aut.binary.connectedAut import CAut
+from aut.binary.flipAut import FAut
+from aut.binary.backgroundAut import BaAut
 
 from aut.ternary.alternatingTernaryAut import ATAut
 from aut.ternary.elementaryTernaryAut import ETAut
